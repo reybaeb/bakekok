@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bakekok - Kompresor File Universal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #50e3c2;
+            --background-color: #f0f2f5;
+            --container-bg: #ffffff;
+            --text-color: #333;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--container-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .logo-svg {
+            display: block;
+            margin: 0 auto 20px auto;
+            max-width: 220px;
+        }
+
+        h1 {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            background: #e9ecef;
+            border-radius: var(--border-radius);
+            padding: 5px;
+        }
+
+        .options label {
+            flex: 1;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .options input[type="radio"] {
+            display: none;
+        }
+
+        .options input[type="radio"]:checked + label {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .upload-area {
+            border: 2px dashed var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .upload-area:hover {
+            background-color: #e9ecef;
+        }
+
+        .upload-area p {
+            margin: 0;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .upload-area span {
+            font-size: 14px;
+            color: #777;
+        }
+
+        #file-name {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-top: 10px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        
+        .flash {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .flash.error { background-color: #f8d7da; color: #721c24; }
+        .flash.success { background-color: #d4edda; color: #155724; }
+
+        .aggressive-option {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .aggressive-option label {
+            margin-left: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .manual-link {
+            margin-top: 30px;
+        }
+
+        .manual-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .manual-link a:hover {
+            color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg class="logo-svg" viewBox="0 0 220 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="220" height="60" rx="18" fill="#4a90e2"/>
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="'Poppins', Arial, sans-serif" font-size="32" font-weight="bold" fill="#fff" letter-spacing="2">Bakekok</text>
+        </svg>
+        <h1>Kompresor File Bakekok</h1>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/" method="post" enctype="multipart/form-data" id="compressor-form">
+            <div class="options">
+                <input type="radio" id="image" name="compression_type" value="image" checked>
+                <label for="image">Gambar</label>
+
+                <input type="radio" id="document" name="compression_type" value="document">
+                <label for="document">Dokumen</label>
+
+                <input type="radio" id="archive" name="compression_type" value="archive">
+                <label for="archive">Arsip</label>
+            </div>
+
+            <div class="upload-area" id="upload-area">
+                <input type="file" name="file" id="file-input" required>
+                <p>Seret & Lepas file Anda di sini</p>
+                <span>atau klik untuk memilih file</span>
+                <div id="file-name"></div>
+            </div>
+
+            <div class="aggressive-option">
+                <input type="checkbox" id="aggressive" name="aggressive" value="true">
+                <label for="aggressive">Aktifkan Kompresi Agresif (dapat mengurangi kualitas)</label>
+            </div>
+
+            <button type="submit" class="submit-btn">Kompres & Unduh</button>
+        </form>
+        
+        <div class="manual-link">
+            <a href="/manual">Baca Panduan Pengguna</a>
+        </div>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('upload-area');
+        const fileInput = document.getElementById('file-input');
+        const fileNameDisplay = document.getElementById('file-name');
+
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                fileNameDisplay.textContent = `Selected: ${fileInput.files[0].name}`;
+            }
+        });
+
+        // Optional: Drag and drop functionality
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.backgroundColor = '#e9ecef';
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.backgroundColor = '#f8f9fa';
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.backgroundColor = '#f8f9fa';
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                fileNameDisplay.textContent = `Selected: ${files[0].name}`;
+            }
+        });
+    </script>
+</body>
+</html>
