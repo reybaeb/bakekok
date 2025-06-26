@@ -46,10 +46,3 @@ Aplikasi ini adalah web sederhana untuk mengompres gambar secara otomatis, diban
 ## Struktur Folder Penting
 - `uploads/` : Menyimpan file gambar yang diunggah oleh pengguna
 - `templates/` : Berisi file HTML untuk tampilan web
-
-## Lisensi
-Proyek ini menggunakan lisensi MIT. Lihat file [LICENSE](./LICENSE) untuk detail.
-
-## Code Coverage
-
-For detailed code coverage information, see the [Code Coverage Report](./README_COVERAGE.md).
