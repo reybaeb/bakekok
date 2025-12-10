@@ -1,116 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panduan Pengguna - Bakekok</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-        :root {
-            --primary-color: #4a90e2;
-            --background-color: #f0f2f5;
-            --container-bg: #ffffff;
-            --text-color: #333;
-            --border-radius: 12px;
-            --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        /* Specific overrides for manual page content */
+        .container { max-width: 480px; text-align: left; padding: 24px; }
+        
+        h1, h2, h3 { 
+            font-family: 'Space Grotesk', sans-serif;
+            margin-top: 16px; 
+            margin-bottom: 8px; 
+            color: var(--ink-main);
         }
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            margin: 0;
-            padding: 40px;
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: var(--container-bg);
-            padding: 40px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
-        h1, h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-        p {
-            margin-bottom: 15px;
-        }
-        code {
-            background-color: #e9ecef;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace;
-        }
-        .warning {
-            background-color: #fff3cd;
-            border-left: 5px solid #ffeeba;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
-        }
-        .home-link {
+        
+        h1 { 
+            text-align: center; 
+            margin-bottom: 24px; 
+            font-size: 1.6rem;
+            border-bottom: 3px solid var(--pop-blue);
             display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: var(--primary-color);
-            color: white;
+            padding-bottom: 4px;
+            width: 100%;
+        }
+
+        h2 { border-left: 4px solid var(--pop-yellow); padding-left: 10px; font-size: 1.1rem; }
+        h3 { font-size: 0.95rem; }
+
+        p, li { 
+            color: var(--ink-muted); 
+            line-height: 1.5; 
+            margin-bottom: 8px; 
+            font-size: 0.85rem; 
+        }
+        
+        ul { margin-left: 16px; margin-bottom: 12px; }
+        
+        .warning-box {
+            background: #fffbeb;
+            border: 2px solid var(--pop-yellow);
+            color: var(--ink-main);
+            padding: 12px;
+            margin: 16px 0;
+            box-shadow: 3px 3px 0px var(--ink-main);
+            font-size: 0.85rem;
+        }
+        
+        code { 
+            background: #e4e4e7;
+            padding: 1px 4px; 
+            font-family: 'Space Grotesk', monospace; 
+            border: 1px solid var(--ink-main);
+            font-size: 0.8rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 24px;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
+            color: var(--ink-main);
+            background: white;
+            border: 2px solid var(--ink-main);
+            padding: 8px 16px;
+            font-weight: 700;
+            transition: 0.2s;
+            box-shadow: 3px 3px 0px var(--ink-main);
+            font-size: 0.85rem;
         }
-        .logo {
-            max-width: 150px;
-            display: block;
-            margin: 0 auto 20px;
-        }
-        .logo-svg {
-            width: 220px;
-            height: 60px;
-            margin: 0 auto 20px;
+        .back-btn:hover { 
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0px var(--pop-blue);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <svg class="logo-svg" viewBox="0 0 220 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0" y="0" width="220" height="60" rx="18" fill="#4a90e2"/>
-            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="'Poppins', Arial, sans-serif" font-size="32" font-weight="bold" fill="#fff" letter-spacing="2">Bakekok</text>
-        </svg>
-        <h1>Panduan Pengguna Bakekok</h1>
+        <h1>Panduan Pengguna</h1>
 
-        <h2>Cara Menggunakan</h2>
-        <p>1. Pilih jenis file yang ingin Anda kompres: <strong>Gambar</strong>, <strong>Dokumen (PDF)</strong>, atau <strong>Arsip (ZIP)</strong>.</p>
-        <p>2. Seret dan lepas file Anda ke area unggah, atau klik untuk memilihnya dari komputer Anda.</p>
-        <p>3. Untuk file PDF dan ZIP, Anda dapat mencentang kotak <strong>"Aktifkan Kompresi Agresif"</strong> untuk ukuran file yang lebih kecil, tetapi ini dapat mengurangi kualitas.</p>
-        <p>4. Klik tombol "Kompres & Unduh". Unduhan Anda akan dimulai secara otomatis.</p>
+        <h2><span class="material-icons-round" style="vertical-align: sub; color: var(--pop-blue);">auto_awesome</span> Cara Menggunakan</h2>
+        <p>1. <strong>Pilih Jenis File:</strong> Pilih <code>Gambar</code>, <code>Dokumen (PDF)</code>, atau <code>Arsip (ZIP)</code> pada panel atas.</p>
+        <p>2. <strong>Upload File:</strong> Seret file ke area kotak atau klik area tersebut.</p>
+        <p>3. <strong>Opsi Agresif:</strong> Geser tombol <em>"Mode Agresif"</em> jika butuh kompresi maksimal (kualitas turun).</p>
+        <p>4. <strong>Eksekusi:</strong> Tekan tombol hitam besar <strong>"MULAI KOMPRESI"</strong>.</p>
 
-        <h2>Catatan Penting: Mengapa Ukuran File Saya Terkadang Bertambah?</h2>
-        <div class="warning">
-            <p><strong>Tidak semua file bisa dikompres lebih lanjut!</strong> Jika sebuah file sudah sangat terkompresi, mencoba mengompresnya lagi terkadang dapat menambahkan sedikit data (metadata), menyebabkan ukuran file sedikit bertambah. Ini normal dan sudah diduga.</p>
-            <p>Ini sering terjadi pada:</p>
-            <ul>
-                <li><strong>Gambar JPG/PNG:</strong> Ini adalah format gambar yang sudah terkompresi.</li>
-                <li><strong>PDF Modern:</strong> PDF yang dibuat oleh perangkat lunak modern seringkali sudah dioptimalkan.</li>
-                <li><strong>File ZIP:</strong> File ZIP, menurut definisinya, sudah merupakan arsip terkompresi.</li>
-            </ul>
+        <div class="warning-box">
+            <p><strong><span class="material-icons-round" style="vertical-align: sub;">warning</span> Kenapa ukuran file bertambah?</strong></p>
+            <p>File yang sudah optimal (seperti JPG terkompresi) jika dikompres lagi justru akan menambah metadata. Ini adalah perilaku normal algoritma.</p>
         </div>
         
-        <h2>Penjelasan Jenis Kompresi</h2>
-        <h3>Kompresi Gambar</h3>
-        <p>Mengurangi ukuran file gambar JPG, PNG, dan GIF dengan mengoptimalkan data gambar. Ini adalah kompresi "lossy", yang berarti beberapa kualitas hilang, tetapi biasanya tidak terlalu kentara.</p>
-        
-        <h3>Kompresi Dokumen (PDF)</h3>
-        <p><strong>Standar:</strong> Melakukan optimasi dasar seperti menghapus data yang tidak terpakai. Efektif untuk PDF yang belum dioptimalkan.</p>
-        <p><strong>Agresif:</strong> Mode ini akan menemukan gambar di dalam PDF Anda dan mengurangi kualitas serta resolusinya. Ini menghasilkan ukuran file yang jauh lebih kecil tetapi akan membuat gambar terlihat kurang tajam.</p>
+        <h2><span class="material-icons-round" style="vertical-align: sub; color: var(--pop-red);">tune</span> Detail Teknis</h2>
+        <h3>Kompresi PDF</h3>
+        <ul>
+            <li><strong>Standar:</strong> Pembersihan struktur file.</li>
+            <li><strong>Agresif:</strong> *Re-sampling* seluruh gambar dalam PDF ke resolusi lebih rendah.</li>
+        </ul>
 
-        <h3>Kompresi Arsip (ZIP)</h3>
-        <p><strong>Standar:</strong> Mengemas ulang file ZIP dengan pengaturan kompresi tertinggi. Ini hanya efektif jika ZIP asli dibuat dengan kompresi rendah atau tanpa kompresi.</p>
-        <p><strong>Agresif:</strong> Mode ini akan mengekstrak konten file ZIP Anda, menemukan gambar di dalamnya, mengompresnya, dan kemudian membuat arsip ZIP baru. Ini sangat efektif jika ZIP Anda berisi gambar yang belum dikompresi.</p>
+        <h3>Kompresi ZIP</h3>
+        <ul>
+            <li><strong>Standar:</strong> Re-pack Deflate (Level 9).</li>
+            <li><strong>Agresif:</strong> Ekstrak isi -> Kompres Gambar -> Re-zip.</li>
+        </ul>
 
-        <a href="/" class="home-link">Kembali ke Kompresor</a>
+        <div style="text-align: center;">
+            <a href="/" class="back-btn"><span class="material-icons-round" style="margin-right:8px;">arrow_back</span> KEMBALI KE APLIKASI</a>
+        </div>
     </div>
 </body>
 </html> 

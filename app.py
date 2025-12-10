@@ -2,13 +2,17 @@ import os
 import zipfile
 import fitz  # PyMuPDF
 from flask import Flask, flash, redirect, render_template, request, send_file, url_for
+from werkzeug.utils import secure_filename
+import uuid
 from PIL import Image
 import tempfile
 import shutil
 import io
 
 app = Flask(__name__)
-app.secret_key = os.getenv("secret_key") or "default_secret_key"
+app = Flask(__name__)
+# Generate a random secret key if not provided in environment (better than static default)
+app.secret_key = os.getenv("secret_key") or os.urandom(24)
 
 # Define allowed extensions for each file type
 ALLOWED_EXTENSIONS = {
@@ -134,13 +138,21 @@ def compressor_route():
             flash(f"Jenis file tidak valid untuk kompresi '{compression_type}'. Yang diizinkan: {', '.join(ALLOWED_EXTENSIONS[compression_type])}", "error")
             return redirect(request.url)
             
-        filename = uploaded_file.filename
+        # Secure the filename to prevent path traversal
+        original_filename = secure_filename(uploaded_file.filename)
+        # Add UUID to prevent filename collisions
+        filename = f"{uuid.uuid4().hex}_{original_filename}"
+        
         type_folder_map = {
             "image": "images",
             "document": "documents",
             "archive": "archives"
         }
         subfolder = type_folder_map.get(compression_type)
+
+        # Ensure directories exist (redundant with startup check but safe)
+        os.makedirs(os.path.join("uploads", subfolder), exist_ok=True)
+        os.makedirs(os.path.join("compressed", subfolder), exist_ok=True)
 
         input_path = os.path.join("uploads", subfolder, filename)
         output_path = os.path.join("compressed", subfolder, filename)

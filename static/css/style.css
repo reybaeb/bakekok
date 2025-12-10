@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+    /* 60% - Backgrounds */
+    --bg-paper: #fbfaf9;
+    --bg-card: #ffffff;
+    
+    /* 30% - Structure (Ink) */
+    --ink-main: #18181b;
+    --ink-muted: #52525b;
+    --border-width: 2px;
+    
+    /* 10% - Pop Accents (Bauhaus Palette) */
+    --pop-blue: #3b82f6;   /* Primary Action */
+    --pop-red: #ef4444;    /* Danger/Alert */
+    --pop-yellow: #fbbf24; /* Highlight/Focus */
+    --pop-green: #22c55e;  /* Success */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-paper);
+    color: var(--ink-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Dot pattern background for subtle texture */
+    background-image: radial-gradient(var(--ink-muted) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
+}
+
+/* Container: The Compact Canvas */
+.container {
+    width: 100%;
+    max-width: 420px; /* Reduced width */
+    background: var(--bg-card);
+    border: var(--border-width) solid var(--ink-main);
+    box-shadow: 6px 6px 0px var(--ink-main); /* Smaller shadow */
+    padding: 32px; /* Reduced padding */
+    position: relative;
+    transition: transform 0.2s;
+}
+
+/* Header Typography */
+.brand {
+    margin-bottom: 24px; /* Reduced margin */
+    text-align: left;
+    border-bottom: var(--border-width) solid var(--ink-main);
+    padding-bottom: 12px;
+}
+
+.brand h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem; /* Reduced font size */
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    margin-bottom: 4px;
+    text-transform: lowercase;
+}
+
+.brand h1::after {
+    content: '.';
+    color: var(--pop-blue);
+}
+
+.brand p {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--ink-muted);
+    font-size: 0.85rem; /* Smaller subtext */
+    font-weight: 500;
+}
+
+/* Option Tabs */
+.options-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px; /* Tighter gap */
+    margin-bottom: 20px;
+}
+
+.option-input {
+    display: none;
+}
+
+.option-label {
+    padding: 10px; /* Reduced padding */
+    text-align: center;
+    cursor: pointer;
+    border: var(--border-width) solid var(--ink-main);
+    background: var(--bg-card);
+    font-weight: 600;
+    font-size: 0.8rem; /* Smaller font */
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.option-label:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 2px 2px 0px var(--ink-main);
+}
+
+/* Active States */
+#image:checked + label,
+#document:checked + label,
+#archive:checked + label {
+    box-shadow: 2px 2px 0px var(--ink-main);
+    transform: translate(-1px, -1px);
+}
+
+#image:checked + label { background-color: var(--pop-blue); color: white; }
+#document:checked + label { background-color: var(--pop-red); color: white; }
+#archive:checked + label { background-color: var(--pop-yellow); color: var(--ink-main); }
+
+/* Upload Zone */
+.upload-zone {
+    border: var(--border-width) dashed var(--ink-muted);
+    background-color: #f4f4f5;
+    padding: 24px 16px; /* Compact padding */
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.upload-zone:hover, .upload-zone.dragover {
+    background-color: #fff;
+    border-color: var(--ink-main);
+    border-style: solid;
+    transform: scale(1.01);
+}
+
+.upload-icon {
+    font-size: 32px; /* Smaller icon */
+    margin-bottom: 8px;
+    display: block;
+    color: var(--ink-main);
+}
+
+.upload-text {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.file-preview {
+    margin-top: 10px;
+    padding: 4px 8px;
+    background: var(--ink-main);
+    color: white;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 0.8rem;
+    display: inline-block;
+    transform: rotate(-1deg);
+}
+
+/* Toggle Switch (Brutalist) */
+.toggle-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    padding: 8px;
+    border: 1px solid transparent;
+}
+.toggle-wrapper:hover {
+    border: 1px dashed var(--ink-muted);
+}
+
+.toggle-wrapper input {
+    display: none;
+}
+.toggle-switch {
+    width: 40px; /* Smaller switch */
+    height: 22px;
+    border: var(--border-width) solid var(--ink-main);
+    background: white;
+    position: relative;
+    margin-right: 12px;
+    transition: 0.2s;
+}
+.toggle-switch::after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    background: var(--ink-main);
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: 0.2s;
+}
+.toggle-wrapper input:checked + .toggle-switch {
+    background: var(--pop-yellow);
+}
+.toggle-wrapper input:checked + .toggle-switch::after {
+    left: 18px;
+}
+.toggle-label {
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* Call to Action Button */
+.cta-btn {
+    width: 100%;
+    padding: 16px; /* Reduced padding */
+    border: var(--border-width) solid var(--ink-main);
+    background: var(--ink-main);
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cta-btn:hover {
+    background: white;
+    color: var(--ink-main);
+    box-shadow: 4px 4px 0px var(--pop-green);
+    transform: translate(-2px, -2px);
+}
+
+.cta-btn:active {
+    transform: translate(0, 0);
+    box-shadow: none;
+}
+
+/* Flash Messages */
+.flash-msg {
+    padding: 12px;
+    border: var(--border-width) solid var(--ink-main);
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+}
+.flash-msg.success { background-color: var(--pop-green); color: white; }
+.flash-msg.error { background-color: var(--pop-red); color: white; }
+
+/* Footer */
+.footer-link {
+    margin-top: 20px;
+    display: block;
+    text-align: center;
+    color: var(--ink-muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border-bottom: 1px solid transparent;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-link:hover {
+    color: var(--ink-main);
+    border-bottom-color: var(--ink-main);
+}
