@@ -10,7 +10,7 @@ import shutil
 import io
 
 app = Flask(__name__)
-app = Flask(__name__)
+
 # Generate a random secret key if not provided in environment (better than static default)
 app.secret_key = os.getenv("secret_key") or os.urandom(24)
 
